@@ -1,5 +1,5 @@
 # My NeoVim set up
-# test 
+
 ## Done
 - [X] Added line #s using `set number`
 - [X] Added nice colorscheme (terafox) using EdenEast nightfox plugin--terafox version
