@@ -16,5 +16,8 @@ Plug 'freddiehaddad/feline.nvim'
 call plug#end()
 
 lua require('nightfox').load('terafox')
+lua require('feline').setup()
+lua require('feline').winbar.setup()
+lua require('feline').statuscolumn.setup()
 
 colorscheme terafox
