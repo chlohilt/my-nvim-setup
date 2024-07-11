@@ -1,6 +1,10 @@
 set number
 set clipboard+=unnamedplus
 set backspace=indent,eol,start
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 " Set the leader key to space
 let mapleader=" "
