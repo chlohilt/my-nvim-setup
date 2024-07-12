@@ -11,6 +11,24 @@ let mapleader=" "
 " Map double leader press to source the Vim config file
 nnoremap <silent> <Leader><Leader> :source $MYVIMRC<cr>
 
+" ALE SETUP
+" Set autocomplete on Ale
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+" Set fix on save and keep gutters always visible
+let g:ale_fix_on_save = 1
+let g:ale_sign_column_always = 1
+" Tab key behavior when popup menu (pum) is visible
+inoremap <silent><expr><TAB>
+    \ pumvisible() ? “\<C-n>” : “\<TAB>”
+" Go To Definition and Find Reference mapped to F12 and F24
+nmap <silent> <F4> :ALEGoToDefinition<CR>
+nmap <silent> <F8> :ALEFindReferences<CR>
+" Navigate between errors
+nmap <silent> <F3> <Plug>(ale_previous_wrap)
+nmap <silent> <F9> <Plug>(ale_next_wrap)
+
 if empty(glob('C:\Users\chloehi\AppData\Local\nvim-data\site\autoload\plug.vim'))
   silent !curl -fLo C:\Users\chloehi\AppData\Local\nvim-data\site\autoload\plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
