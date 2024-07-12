@@ -25,6 +25,7 @@ Plug 'EdenEast/nightfox.nvim'
 Plug 'freddiehaddad/feline.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.6' }
+Plug 'dense-analysis/ale'
 call plug#end()
 
 lua require('nightfox').load('terafox')
