@@ -5,6 +5,7 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+syntax on 
 
 " Set the leader key to space
 let mapleader=" "
@@ -28,6 +29,11 @@ nmap <silent> <F8> :ALEFindReferences<CR>
 " Navigate between errors
 nmap <silent> <F3> <Plug>(ale_previous_wrap)
 nmap <silent> <F9> <Plug>(ale_next_wrap)
+" Enable ALE
+let g:ale_linters = {
+    \ 'typescript': ['eslint'],
+    \ 'yml': ['yamllint'],
+\ }
 
 if empty(glob('C:\Users\chloehi\AppData\Local\nvim-data\site\autoload\plug.vim'))
   silent !curl -fLo C:\Users\chloehi\AppData\Local\nvim-data\site\autoload\plug.vim --create-dirs
