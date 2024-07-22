@@ -48,21 +48,47 @@ function! PasteLatestScreenshot()
     " Path to the PowerShell script
     let ps_script = 'C:\Users\chloehi\Repos\scripts\save_clipboard_image_vim.ps1'
     
-    " Execute PowerShell script and get the filename
-    let latest_file = system('powershell -ExecutionPolicy Bypass -File ' . ps_script)
-    let latest_file = substitute(latest_file, '\n', '', 'g')
+    " Ensure the path is properly escaped
+    let ps_script_escaped = substitute(ps_script, ' ', '` ', 'g')
     
-    if latest_file =~ '^screenshot_\d\+\.png$'
-        " Copy the file to the current working directory
-        let screenshot_dir = 'C:\Users\chloehi\Pictures\Screenshots'
+    " Execute PowerShell script and get the output
+    let cmd = 'powershell -ExecutionPolicy Bypass -File "' . ps_script_escaped . '"'
+    let output = system(cmd)
+    let lines = split(output, "\n")
+    let latest_file = ''
+
+    " Search for the line containing the filename
+    for line in lines
+        if line =~ '^screenshot_\d\+\.png$'
+            let latest_file = line
+            break
+        endif
+    endfor
+
+    if latest_file != ''
+        " Path to the screenshot directory (update this path)
+        let screenshot_dir = 'C:\Users\chloehi\Documents\Screenshots'
         let current_dir = expand('%:p:h')
-        call system('copy ' . screenshot_dir . '\' . latest_file . ' ' . current_dir)
         
-        " Insert the markdown image syntax at the cursor
-        let markdown_syntax = '![' . latest_file . '](' . latest_file . ')'
-        execute "normal! i" . markdown_syntax . "\<Esc>"
+        " Ensure paths are properly escaped
+        let src_path = substitute(screenshot_dir . '\' . latest_file, ' ', '` ', 'g')
+        let dest_path = substitute(current_dir . '\' . latest_file, ' ', '` ', 'g')
+        
+        " Copy the file to the current working directory
+        let copy_cmd = 'powershell -Command "Copy-Item -Path \"' . src_path . '\" -Destination \"' . dest_path . '\""'
+        let copy_output = system(copy_cmd)
+        
+        if v:shell_error == 0
+            " Insert the markdown image syntax at the cursor
+            let markdown_syntax = '![' . latest_file . '](' . latest_file . ')'
+            execute "normal! i" . markdown_syntax . "\<Esc>"
+            echo "Screenshot inserted: " . latest_file
+        else
+            echo "Error copying file. Output: " . copy_output
+        endif
     else
-        echo "Error: No screenshot found in clipboard"
+        echo "Error: No screenshot found. PowerShell output: " . output
+        echo "Command executed: " . cmd
     endif
 endfunction
 
