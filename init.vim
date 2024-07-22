@@ -46,7 +46,7 @@ endif
 " Function to paste latest screenshot in MD file (use <leader>ps)
 function! PasteLatestScreenshot()
     " Path to the PowerShell script
-    let ps_script = 'C:\Users\chloehi\Documents\Scripts\save_clipboard_image.ps1'
+    let ps_script = 'C:\Users\chloehi\Repos\scripts\save_clipboard_image_vim.ps1'
     
     " Execute PowerShell script and get the filename
     let latest_file = system('powershell -ExecutionPolicy Bypass -File ' . ps_script)
