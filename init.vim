@@ -41,6 +41,29 @@ if empty(glob('C:\Users\chloehi\AppData\Local\nvim-data\site\autoload\plug.vim')
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Function to paste latest screenshot in MD file (use <leader>ps)
+function! PasteLatestScreenshot()
+    " Path to the PowerShell script
+    let ps_script = 'C:\Users\chloehi\Documents\Scripts\save_clipboard_image.ps1'
+    
+    " Execute PowerShell script and get the filename
+    let latest_file = system('powershell -ExecutionPolicy Bypass -File ' . ps_script)
+    let latest_file = substitute(latest_file, '\n', '', 'g')
+    
+    if latest_file =~ '^screenshot_\d\+\.png$'
+        " Copy the file to the current working directory
+        let screenshot_dir = 'C:\Users\chloehi\Pictures\Screenshots'
+        let current_dir = expand('%:p:h')
+        call system('copy ' . screenshot_dir . '\' . latest_file . ' ' . current_dir)
+        
+        " Insert the markdown image syntax at the cursor
+        let markdown_syntax = '![' . latest_file . '](' . latest_file . ')'
+        execute "normal! i" . markdown_syntax . "\<Esc>"
+    else
+        echo "Error: No screenshot found in clipboard"
+    endif
+endfunction
+
 call plug#begin('~/.config/nvim/plugged')
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip', {'tag': 'v2.3', 'do': 'make install_jsregexp'}
