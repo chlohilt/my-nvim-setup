@@ -5,6 +5,8 @@ noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+" Map space+ps to paste latest screenshot
+nnoremap <leader>ps :call PasteLatestScreenshot()<CR>
 syntax on 
 
 " Set the leader key to space
