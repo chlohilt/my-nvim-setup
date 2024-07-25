@@ -16,7 +16,7 @@ set shell=/usr/bin/bash
 let $TMP="/tmp"
 
 " Set the leader key to space
-let mapleader=" "
+let mapleader="<space>"
 " Map double leader press to source the Vim config file
 nnoremap <silent> <Leader><Leader> :source $MYVIMRC<cr>
 
