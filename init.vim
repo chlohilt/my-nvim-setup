@@ -1,6 +1,7 @@
 set number
 set clipboard+=unnamedplus
 set backspace=indent,eol,start
+" don't allow arrow keys
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
@@ -8,6 +9,10 @@ noremap <Right> <Nop>
 " Map space+ps to paste latest screenshot
 nnoremap <leader>ps :call PasteLatestScreenshot()<CR>
 syntax on 
+
+" Set up shell configuration
+set shellcmdflag=-c
+set shell=/usr/bin/bash
 
 " Set the leader key to space
 let mapleader=" "
@@ -19,6 +24,8 @@ nnoremap <silent> <Leader><Leader> :source $MYVIMRC<cr>
 set omnifunc=ale#completion#OmniFunc
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
+" Set error sign
+let g:ale_sign_error = '✗'
 " Set fix on save and keep gutters always visible
 let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
