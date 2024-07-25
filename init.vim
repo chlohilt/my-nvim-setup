@@ -14,6 +14,9 @@ syntax on
 set shellcmdflag=-c
 let $TMP="/tmp"
 
+" Mapping to exit out of terminal with Ctrl+C
+tnoremap <C-c> <C-\><C-n>
+
 " Set the leader key to space
 let mapleader="<space>"
 " Map double leader press to source the Vim config file
