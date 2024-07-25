@@ -12,7 +12,6 @@ syntax on
 
 " Set up shell configuration
 set shellcmdflag=-c
-set shell=/usr/bin/bash
 let $TMP="/tmp"
 
 " Set the leader key to space
