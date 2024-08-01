@@ -1,12 +1,38 @@
 set number
+set relativenumber 
 set clipboard+=unnamedplus
 set backspace=indent,eol,start
+" Set the leader key to space
+let mapleader=" "
+
+" make Backspace work like Delete
+set backspace=indent,eol,start
+
+" reload files changed outside of Vim not currently modified in Vim (needs below)
+set autoread
+" http://stackoverflow.com/questions/2490227/how-does-vims-autoread-work#20418591
+au FocusGained,BufEnter * :silent! !
+
+" number of lines above/below when jumping
+set scrolloff=5
+
+" set tab in insert mode
+imap <Tab> <C-V><Tab>
+
+" Indent new line the same as the preceding line
+set autoindent
+
+" http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+set autochdir
+
 " don't allow arrow keys
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
+
 " Map space+ps to paste latest screenshot
+echo "Loading other mapping"
 nnoremap <leader>ps :call PasteLatestScreenshot()<CR>
 syntax on 
 
@@ -17,10 +43,9 @@ let $TMP="/tmp"
 " Mapping to exit out of terminal with Ctrl+C
 tnoremap <C-c> <C-\><C-n>
 
-" Set the leader key to space
-let mapleader="<space>"
+echo "Loading .vimrc"
 " Map double leader press to source the Vim config file
-nnoremap <silent> <leader><leader> :source $MYVIMRC<cr>
+nnoremap <silent> <leader><leader> <Cmd>source $MYVIMRC<CR>
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>

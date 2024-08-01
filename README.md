@@ -14,3 +14,4 @@
 - [ ] map :tabn and tabp to F7 and F8
 - [ ] set up NerdFont for pretty text
 - [ ] figure out what's wrong with GitBash + windows so I can run external commands!!
+- [ ] set up nvim-telescope for fuzzy finder
