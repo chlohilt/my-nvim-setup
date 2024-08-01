@@ -20,7 +20,13 @@ tnoremap <C-c> <C-\><C-n>
 " Set the leader key to space
 let mapleader="<space>"
 " Map double leader press to source the Vim config file
-nnoremap <silent> <Leader><Leader> :source $MYVIMRC<cr>
+nnoremap <silent> <leader><leader> :source $MYVIMRC<cr>
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " ALE SETUP
 " Set autocomplete on Ale
@@ -57,6 +63,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'EdenEast/nightfox.nvim'
 Plug 'freddiehaddad/feline.nvim'
 Plug 'dense-analysis/ale'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 call plug#end()
 
 lua require('nightfox').load('terafox')
