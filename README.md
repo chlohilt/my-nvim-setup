@@ -18,3 +18,4 @@
 - [ ] fix tab issue  Invalid expression: “\^N” : “\^I”
 - [ ] debugging set up!!
 - [ ] add mapping for saving files (:w -> Ctrl s)
+- [ ] set up tmux or something similar for file browsing
