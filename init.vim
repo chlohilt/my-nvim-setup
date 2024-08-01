@@ -32,7 +32,6 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 
 " Map space+ps to paste latest screenshot
-echo "Loading other mapping"
 nnoremap <leader>ps :call PasteLatestScreenshot()<CR>
 syntax on 
 
@@ -43,7 +42,7 @@ let $TMP="/tmp"
 " Mapping to exit out of terminal with Ctrl+C
 tnoremap <C-c> <C-\><C-n>
 
-echo "Loading .vimrc"
+echo "Loading .vimrc ..."
 " Map double leader press to source the Vim config file
 nnoremap <silent> <leader><leader> <Cmd>source $MYVIMRC<CR>
 
@@ -85,16 +84,19 @@ if empty(glob('C:\Users\chloehi\AppData\Local\nvim-data\site\autoload\plug.vim')
 endif
 
 call plug#begin('~/.config/nvim/plugged')
+" https://github.com/tpope/vim-commentary for commenting
+Plug 'tpope/vim-commentary'
+
 Plug 'EdenEast/nightfox.nvim'
-Plug 'freddiehaddad/feline.nvim'
+" Plug 'freddiehaddad/feline.nvim'
 Plug 'dense-analysis/ale'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 call plug#end()
 
 lua require('nightfox').load('terafox')
-lua require('feline').setup()
-lua require('feline').winbar.setup()
-lua require('feline').statuscolumn.setup()
+" lua require('feline').setup()
+" lua require('feline').winbar.setup()
+" lua require('feline').statuscolumn.setup()
 
 colorscheme terafox
