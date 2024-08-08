@@ -5,6 +5,7 @@ set backspace=indent,eol,start
 " Set the leader key to space
 let mapleader=" "
 
+filetype plugin indent on
 " make Backspace work like Delete
 set backspace=indent,eol,start
 
