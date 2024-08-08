@@ -92,6 +92,7 @@ Plug 'EdenEast/nightfox.nvim'
 Plug 'dense-analysis/ale'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 lua require('nightfox').load('terafox')
