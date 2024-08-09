@@ -7,15 +7,15 @@
 - [X] figure out split terminals (not supported in GitBash I believe besides using different tabs)
 - [X] add status line, maybe with feline (https://github.com/freddiehaddad/feline.nvim)
 - [X] set up nvim-telescope for fuzzy finder
+- [X] set up NerdFont for pretty text (instead just adjusted Git Bash font)
+- [X] figure out what's wrong with GitBash + windows so I can run external commands!! (using :term)
+- [X] add mapping for saving files (:w -> Ctrl s)
 
 ## TODO
 - [ ] get nvim cmp to autocomplete stuff
 - [ ] install plugin for Git Blame
 - [ ] map :tabn and tabp to F7 and F8
-- [ ] set up NerdFont for pretty text
-- [ ] figure out what's wrong with GitBash + windows so I can run external commands!!
 - [ ] figure out what's happening with feline
 - [ ] fix tab issue  Invalid expression: “\^N” : “\^I”
 - [ ] debugging set up!!
-- [ ] add mapping for saving files (:w -> Ctrl s)
 - [ ] set up tmux or something similar for file browsing

@@ -32,6 +32,9 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+" Map writing files to Ctrl+s
+nnoremap <C-s> <cmd>w<cr>
+
 " Map space+ps to paste latest screenshot
 nnoremap <leader>ps :call PasteLatestScreenshot()<CR>
 syntax on 
@@ -40,8 +43,8 @@ syntax on
 set shellcmdflag=-c
 let $TMP="/tmp"
 
-" Mapping to exit out of terminal with Ctrl+C
-tnoremap <C-c> <C-\><C-n>
+" Mapping to exit out of terminal with Ctrl+x
+tnoremap <C-x> <C-\><C-n>
 
 echo "Loading .vimrc ..."
 " Map double leader press to source the Vim config file
