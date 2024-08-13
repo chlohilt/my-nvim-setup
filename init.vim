@@ -81,6 +81,24 @@ let g:ale_linters = {
     \ 'yml': ['yamllint'],
 \ }
 
+" Gutentags set up 
+" define what a "new project" (has package json file and .git file)
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['package.json', '.git']
+" move tags and tags lock file so they don't show up in git
+let g:gutentags_cache_dir = expand('~/.cache/vim/ctags/')
+" configure Gutentags to generate in most cases
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+" a=access of class members, i=inheritance info, m=implementation info,
+" s=signature of routine
+let g:gutentags_ctags_extra_args = [
+      \ '--tag-relative=yes',
+      \ '--fields=+aimS',
+      \ ]
+
 if empty(glob('C:\Users\chloehi\AppData\Local\nvim-data\site\autoload\plug.vim'))
   silent !curl -fLo C:\Users\chloehi\AppData\Local\nvim-data\site\autoload\plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -104,6 +122,9 @@ Plug 'dense-analysis/ale'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 Plug 'jiangmiao/auto-pairs'
+" Gutentags for tag files in Vim (allows for jumping to function definition
+" quickly)
+Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 
 lua require('nightfox').load('terafox')
