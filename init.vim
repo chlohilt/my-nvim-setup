@@ -125,6 +125,8 @@ Plug 'jiangmiao/auto-pairs'
 " Gutentags for tag files in Vim (allows for jumping to function definition
 " quickly)
 Plug 'ludovicchabant/vim-gutentags'
+" Plugin for file system explorer
+Plug 'preservim/nerdtree'
 call plug#end()
 
 lua require('nightfox').load('terafox')
@@ -145,7 +147,7 @@ lua <<EOF
         vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
       end,
     },
-    mapping = cmp.mapping.preset.insert({
+    mapping = cmp.mapping.preset.insert({ 
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
@@ -161,7 +163,6 @@ lua <<EOF
 
   -- Set up lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   require('lspconfig')['tsserver'].setup {
     capabilities = require('cmp_nvim_lsp').default_capabilities()
   }
