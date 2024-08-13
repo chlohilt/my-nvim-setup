@@ -90,7 +90,14 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 " https://github.com/tpope/vim-commentary for commenting
 Plug 'tpope/vim-commentary'
-
+" https://github.com/hrsh7th/nvim-cmp for autocompletion
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+" color scheme
 Plug 'EdenEast/nightfox.nvim'
 " Plug 'freddiehaddad/feline.nvim'
 Plug 'dense-analysis/ale'
@@ -105,3 +112,36 @@ lua require('nightfox').load('terafox')
 " lua require('feline').statuscolumn.setup()
 
 colorscheme terafox
+
+lua <<EOF
+  -- Set up nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+      end,
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' }
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Set up lspconfig.
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['tsserver'].setup {
+    capabilities = require('cmp_nvim_lsp').default_capabilities()
+  }
+EOF
