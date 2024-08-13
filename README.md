@@ -10,11 +10,10 @@
 - [X] set up NerdFont for pretty text (instead just adjusted Git Bash font)
 - [X] figure out what's wrong with GitBash + windows so I can run external commands!! (using :term)
 - [X] add mapping for saving files (:w -> Ctrl s)
+- [X] get nvim cmp to autocomplete stuff
 
 ## TODO
-- [ ] get nvim cmp to autocomplete stuff
 - [ ] install plugin for Git Blame
-- [ ] map :tabn and tabp to F7 and F8
 - [ ] figure out what's happening with feline
 - [ ] fix tab issue  Invalid expression: “\^N” : “\^I”
 - [ ] debugging set up!!
