@@ -1,9 +1,14 @@
 set number
-set relativenumber 
 set clipboard+=unnamedplus
 set backspace=indent,eol,start
+set encoding=UTF-8
 " Set the leader key to space
 let mapleader=" "
+" Set Git Bash as the default shell
+set shell=C:/Program\ Files/Git/bin/bash.exe
+set shellcmdflag=-c
+set shellquote=\"
+set shellxquote=
 
 filetype plugin indent on
 " make Backspace work like Delete
@@ -121,12 +126,14 @@ Plug 'EdenEast/nightfox.nvim'
 Plug 'dense-analysis/ale'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 " Gutentags for tag files in Vim (allows for jumping to function definition
 " quickly)
 Plug 'ludovicchabant/vim-gutentags'
 " Plugin for file system explorer
 Plug 'preservim/nerdtree'
+" Plugin for vim icons
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 lua require('nightfox').load('terafox')
@@ -140,30 +147,30 @@ lua <<EOF
   -- Set up nvim-cmp.
   local cmp = require'cmp'
 
-  cmp.setup({
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
-      end,
-    },
-    mapping = cmp.mapping.preset.insert({ 
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' }
-    }, {
-      { name = 'buffer' },
-    })
-  })
+   cmp.setup({
+     snippet = {
+       -- REQUIRED - you must specify a snippet engine
+       expand = function(args)
+         vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+       end,
+     },
+     mapping = cmp.mapping.preset.insert({ 
+       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+       ['<C-f>'] = cmp.mapping.scroll_docs(4),
+       ['<C-Space>'] = cmp.mapping.complete(),
+       ['<C-e>'] = cmp.mapping.abort(),
+       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+     }),
+     sources = cmp.config.sources({
+       { name = 'nvim_lsp' }
+     }, {
+       { name = 'buffer' },
+     })
+   })
 
-  -- Set up lspconfig.
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  require('lspconfig')['tsserver'].setup {
-    capabilities = require('cmp_nvim_lsp').default_capabilities()
-  }
+   -- Set up lspconfig.
+   local capabilities = require('cmp_nvim_lsp').default_capabilities()
+   require('lspconfig')['tsserver'].setup {
+     capabilities = require('cmp_nvim_lsp').default_capabilities()
+   } 
 EOF
