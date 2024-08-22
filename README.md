@@ -18,3 +18,9 @@
 - [ ] fix tab issue  Invalid expression: “\^N” : “\^I”
 - [ ] debugging set up!!
 - [ ] set up tmux or something similar for file browsing
+- [ ] install a vim markdown viewer https://github.com/iamcco/markdown-preview.nvim 
+
+## Resources
+* https://thevaluable.dev/vim-intermediate/ 
+* https://vim-adventures.com/
+
