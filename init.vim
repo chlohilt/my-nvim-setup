@@ -1,11 +1,11 @@
-set number
 set clipboard+=unnamedplus
 set backspace=indent,eol,start
 set encoding=UTF-8
+set relativenumber
 " Set the leader key to space
 let mapleader=" "
 " Set Git Bash as the default shell
-set shell=C:/Program\ Files/Git/bin/bash.exe
+set shell=/bin/zsh " add logic to check what the OS is and change shell based on that
 set shellcmdflag=-c
 set shellquote=\"
 set shellxquote=
@@ -170,7 +170,7 @@ lua <<EOF
 
    -- Set up lspconfig.
    local capabilities = require('cmp_nvim_lsp').default_capabilities()
-   require('lspconfig')['tsserver'].setup {
+   require('lspconfig')['ts_ls'].setup {
      capabilities = require('cmp_nvim_lsp').default_capabilities()
    } 
 EOF
