@@ -3,7 +3,7 @@ set clipboard+=unnamedplus
 set backspace=indent,eol,start
 set encoding=UTF-8
 " Enable folding
-set foldmethod=syntax  " Use syntax-based folding
+" set foldmethod=syntax  " Use syntax-based folding
 set foldlevelstart=99  " Start with all folds open
 set foldnestmax=10     " Maximum fold depth
 set foldenable         " Enable folding
@@ -21,24 +21,24 @@ set shellquote=\"
 set shellxquote=
 
 filetype plugin indent on
-" make Backspace work like Delete
+" Make Backspace work like Delete
 set backspace=indent,eol,start
 
 " reload files changed outside of Vim not currently modified in Vim (needs below)
 set autoread
-" http://stackoverflow.com/questions/2490227/how-does-vims-autoread-work#20418591
+" Stackoverflow: http://stackoverflow.com/questions/2490227/how-does-vims-autoread-work#20418591
 au FocusGained,BufEnter * :silent! !
 
 " number of lines above/below when jumping
 set scrolloff=5
 
-" set tab in insert mode
+" Set tab in insert mode
 imap <Tab> <C-V><Tab>
 
 " Indent new line the same as the preceding line
 set autoindent
 
-" http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+" See: http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
 set autochdir
 
 " don't allow arrow keys
@@ -83,7 +83,7 @@ let g:ale_fix_on_save = 1
 let g:ale_sign_column_always = 1
 " Tab key behavior when popup menu (pum) is visible
 inoremap <silent><expr><TAB>
-    \ pumvisible() ? “\<C-n>” : “\<TAB>”
+    \ pumvisible() ? "\<C-n>" : "\<TAB>"
 " Use j to navigate down in the popup menu
 inoremap <silent><expr> j pumvisible() ? "\<C-n>" : "j"
 " Use k to navigate up in the popup menu
@@ -126,7 +126,7 @@ if empty(glob('C:\Users\chloehi\AppData\Local\nvim-data\site\autoload\plug.vim')
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.config/nvim/my-nvim-setup/plugged')
 " https://github.com/tpope/vim-commentary for commenting
 Plug 'tpope/vim-commentary'
 " https://github.com/hrsh7th/nvim-cmp for autocompletion
@@ -141,6 +141,7 @@ Plug 'EdenEast/nightfox.nvim'
 " Plug 'freddiehaddad/feline.nvim'
 Plug 'dense-analysis/ale'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'pmizio/typescript-tools.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 " Plug 'jiangmiao/auto-pairs'
 " Gutentags for tag files in Vim (allows for jumping to function definition
@@ -205,9 +206,21 @@ local cmp_nvim_lsp = safe_require('cmp_nvim_lsp')
 
 if lspconfig and cmp_nvim_lsp then
     local capabilities = cmp_nvim_lsp.default_capabilities()
-    lspconfig['tsserver'].setup {
-        capabilities = capabilities
-    }
+    local tools_ok, typescript_tools = pcall(require, "typescript-tools")
+    if tools_ok then
+        typescript_tools.setup({
+            capabilities = capabilities,
+            settings = {
+                -- spawn additional tsserver instance to avoid conflicts
+                separate_server = true,
+            }
+        })
+    else
+        print("typescript-tools not loaded, falling back to tsserver")
+        lspconfig.tsserver.setup({
+            capabilities = capabilities
+        })
+    end
 else
     print("lspconfig or cmp_nvim_lsp not loaded, skipping lsp setup")
 end
